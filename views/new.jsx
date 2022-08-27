@@ -1,7 +1,8 @@
 const React = require('react')
 const Default = require('./layouts/Default')
+const baker_seed = require('../models/baker_seed')
 
-function New () {
+function New ({bakers}) {
     return (
       <Default>
         <h2>Add a new bread</h2>
@@ -18,6 +19,14 @@ function New () {
             type="text"
             name="image"
             id="image"/>
+            <label htmlFor="baker">Baker</label>
+            <select name="baker" id="baker">
+              {bakers.map((baker) => {
+                return(
+                  <option value={baker.id} key={baker.id}>{baker.name}</option>
+                )
+              })}
+            </select>
           <label htmlFor="hasGluten">Has Gluten?</label>
           <input
             type="checkbox"
@@ -28,10 +37,6 @@ function New () {
           <br />
           <input type="submit"/>
         </form>
-        <div className="backButton">
-            <a href="/breads"><button>Go back to the index</button></a>
-        </div>
-
       </Default>
     )
 }
